@@ -1,8 +1,8 @@
 /// <reference types="fhir" />
 
-export = fhirClient;
+export = fhirClient
 
-declare function fhirClient(cfg: any, adapter: any): fhirClient.FhirClient;
+declare function fhirClient (cfg: any, adapter: any): fhirClient.FhirClient;
 
 declare namespace fhirClient {
   export type ClientFn = (...args: any[]) => Promise<{ data: any }>
@@ -12,19 +12,19 @@ declare namespace fhirClient {
     [key: string]: any
   }
 
-  function Create<T extends fhir.DomainResource>(content: { resource: T }): Promise<{ data: T }>
-  function Create(content: { type: 'Binary', data: any }): Promise<{ data: fhir.Binary }>
-  function Create<T extends fhir.DomainResource>(content: { type: ResourceName, data: T }): Promise<{ data: T }>
+  function Create<T extends fhir.DomainResource> (content: { resource: T }): Promise<{ data: T }>
+  function Create (content: { type: 'Binary', data: Buffer }): Promise<{ data: fhir.Binary }>
+  function Create<T extends fhir.DomainResource> (content: { type: ResourceName, data: T }): Promise<{ data: T }>
 
-  function Read(content: { type: ResourceName, id: string }): Promise<{ data: fhir.DomainResource }>
+  function Read (content: { type: ResourceName, id: string }): Promise<{ data: fhir.DomainResource }>
 
-  function Patch(content: { type: ResourceName, id: string, data: Array<{ op: 'replace' | 'add' | 'remove', path: string, value: string | object }> }): Promise<{ data: fhir.OperationOutcome }>
+  function Patch (content: { type: ResourceName, id: string, data: Array<{ op: 'replace' | 'add' | 'remove', path: string, value: string | object }> }): Promise<{ data: fhir.OperationOutcome }>
 
-  function Update<T extends fhir.DomainResource>(content: { resource: T }): Promise<{ data: T }>
+  function Update<T extends fhir.DomainResource> (content: { resource: T }): Promise<{ data: T }>
 
-  function Search(content: { type: ResourceName, count?: number, query?: QueryOptions }): Promise<{ data: fhir.Bundle }>
+  function Search (content: { type: ResourceName, count?: number, query?: QueryOptions }): Promise<{ data: fhir.Bundle }>
 
-  function NextPage(content: { type: ResourceName, bundle: fhir.Bundle }): Promise<{ data: fhir.Bundle }>;
+  function NextPage (content: { type: ResourceName, bundle: fhir.Bundle }): Promise<{ data: fhir.Bundle }>;
 
   export interface FhirClient {
     conformance: ClientFn
